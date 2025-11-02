@@ -3,7 +3,7 @@ const {cmd , commands} = require('../command')
 const os = require("os")
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson} = require('../lib/functions')
 cmd({
-    pattern: "alive",
+    pattern: "alive3",
     desc: "Check bot online or no.",
     category: "main",
     filename: __filename
@@ -20,23 +20,22 @@ reply(`${e}`)
 //============ping=======
 cmd({
     pattern: "ping",
-    react: "⚡",
-    alias: ["speed"],
-    desc: "Check bot\'s ping",
+    desc: "Check bot's response time.",
     category: "main",
-    use: '.ping',
+    react: "⚡",
     filename: __filename
 },
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-var inital = new Date().getTime();
-let ping = await conn.sendMessage(from , { text: '```Pinging...```'  }, { quoted: mek } )
-var final = new Date().getTime();
-return await conn.edit(ping, '*Pong*\n *' + (final - inital) + ' ms* ' )
-} catch (e) {
-reply(`${e}`)
-console.log(e)
-}
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        const startTime = Date.now()
+        const message = await conn.sendMessage(from, { text: '*```Pinging...```*' })
+        const endTime = Date.now()
+        const ping = endTime - startTime
+        await conn.sendMessage(from, { text: `*DARK-CYBER-MD* : _${ping}ms 💥_` }, { quoted: message })
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
 })
 
 //===========menu========
