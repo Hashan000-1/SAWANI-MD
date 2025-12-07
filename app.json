@@ -15,6 +15,11 @@
       "description": "Put your alive img here.",
       "required": false
     },
+
+    "AUTO_REPLY": {
+      "description": "true",
+      "required": true
+    },
     
     "AUTO_RECORDING": {
       "description": "true",
